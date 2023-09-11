@@ -91,7 +91,55 @@ function handleNextBtn() {
         window.location.href = newurl;
 }
 
-document.addEventListener('DOMContentLoaded', async() => {
-    // await loadData();
-})
+const lang = data[0].lang;
 
+let cache = "";
+let type=lang;
+
+const submitBtn = document.querySelector('.submit-btn');
+submitBtn.addEventListener('click', handleSubmitBtn);
+
+async function handleSubmitBtn() {
+    const path = window.location.href;
+    const parts = path.split('/');
+    const project = parts[3];
+    const questionNumber = parts[5];
+    console.log(parts);
+    let codeToSend;
+    if(type !== lang)
+        codeToSend = cache;
+    else
+        codeToSend = editor.getValue();
+
+    console.log(codeToSend);
+    await fetch(`/${project}/questions/${questionNumber}/submitData`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            code: codeToSend,
+            lang: lang
+        })
+    })
+}
+
+let cacheFlag = true;
+const tabs = document.querySelectorAll('.editor-tabs span');
+tabs.forEach(btn => {
+    btn.addEventListener('click', (e)=> {
+        const classNames = e.target.className.split(' ');
+        type = classNames[0];
+        editor.session.setMode(`ace/mode/${type}`);
+        if(type != lang) {
+            if(cacheFlag)
+                cache = editor.getValue();
+            cacheFlag = false;
+            editor.setValue(userData.type);
+        }
+        else{
+            editor.setValue(cache);
+            cacheFlag=true;
+        }
+    })
+})

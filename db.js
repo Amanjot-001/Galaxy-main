@@ -57,22 +57,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'college name cannot be blank']
       },
-    mentor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'mentor',
-    },
-    team: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'team',
-    },
-    work: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'work',
-    },
-    projects: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'UserProjectsData',
-    }
+    mentor: String,
+    team: String,
+    work: String,
+    projects: String
 })
 
 const UserProjectsDataSchema = new mongoose.Schema({
