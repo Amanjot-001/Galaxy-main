@@ -32,10 +32,10 @@
                 <div class="small"></div>
                 <div class="large">
                     <span class="editor-tabs">
-                        <span class="html tab-selected">HTML</span>
-                        <span class="css">CSS</span>
-                        <span class="javascript">JAVASCRIPT</span>
-                    </span>
+                        <span class="html <%- data[0].lang === 'html' ? 'tab-selected' : '' %>">HTML</span>
+                        <span class="css <%- data[0].lang === 'css' ? 'tab-selected' : '' %>">CSS</span>
+                        <span class="javascript <%- data[0].lang === 'javascript' ? 'tab-selected' : '' %>">JAVASCRIPT</span>
+                    </span>                    
                     <span class="editor-icons">
                         <span class="reload"><i class="fa-solid fa-rotate-right" style="color: #ffffff;"></i></span>
                         <span class="copy"><i class="fa-regular fa-copy" style="color: #ffffff;"></i></span>

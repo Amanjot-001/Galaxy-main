@@ -148,8 +148,6 @@ app.post('/p', async (req, res) => {
     res.json(formattedCode);
 });
 
-
-
 app.post('/handleRunBtn', async (req, res) => {
     const quesNo = req.body.quesNo;
     let html = req.body.html;
@@ -202,8 +200,6 @@ app.post('/handleRunBtn', async (req, res) => {
     }
     res.sendStatus(200);
 })
-
-
 
 
 app.post('/loadData', async(req, res) => {

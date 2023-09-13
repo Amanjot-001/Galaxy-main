@@ -104,8 +104,8 @@ main {
     display: flex;
     justify-content: center;
     width: 100vw;
-    /* height: 80vh; */
-    flex-grow: 1;
+    height: 80vh;
+    /* flex-grow: 1; */
 }
 
 .inner-0, .inner-1, .inner-2 {
@@ -329,15 +329,31 @@ main {
 .inner-1 .medium {
     display: flex;
     justify-content: center;
+    height: 100%;
+    overflow-y: scroll;
     /* padding: 1.5rem; */
+}
+
+.inner-1 .medium::-webkit-scrollbar {
+    background-color: transparent;
+    height: 5px;
+    width: 5px;
+}
+
+.inner-1 .medium::-webkit-scrollbar-thumb {
+    background-color: #8e8e8e;
 }
 
 .ques-info {
     /* color: #f5f5f5; */
+    display: flex;
+    flex-direction: column;
     font-family: text-fonts;
     font-size: 0.8rem;
-    padding: 1.5rem;
-    overflow-y: auto;
+    /* height: 100%;
+    flex-grow: 1; */
+    padding: 1rem 2rem;
+    /* overflow-y: scroll; */
     /* background-color: #FEFCF3 */
     /* font-weight: lighter; */
 }

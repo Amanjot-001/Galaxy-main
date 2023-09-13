@@ -34,7 +34,7 @@ console.log(preCode.html)
 Editor.setValue(preCode[lang]);
 Editor.session.setMode(`ace/mode/${data[0].lang}`);
 Editor.clearSelection();
-
+const startingCode = Editor.getValue();
 
 exEditor.session.setMode(`ace/mode/${data[0].lang}`);
 exEditor.setValue(data[0].example);
@@ -151,7 +151,7 @@ function handleNextBtn() {
 }
 
 
-let cache = "";
+let cache = Editor.getValue();
 let type=lang;
 
 const submitBtn = document.querySelector('.submit-btn');
@@ -186,6 +186,8 @@ let cacheFlag = true;
 const tabs = document.querySelectorAll('.editor-tabs span');
 tabs.forEach(btn => {
     btn.addEventListener('click', (e)=> {
+        tabs.forEach(tab => tab.classList.remove('tab-selected'));
+        e.target.classList.add('tab-selected');
         const classNames = e.target.className.split(' ');
         type = classNames[0];
         Editor.session.setMode(`ace/mode/${type}`);
@@ -194,10 +196,12 @@ tabs.forEach(btn => {
                 cache = Editor.getValue();
             cacheFlag = false;
             Editor.setValue(userData.projects[0].questions[quesNumber-1].editor[type]);
+            Editor.setReadOnly(true);
         }
         else{
             Editor.setValue(cache);
             cacheFlag=true;
+            Editor.clearSelection();
         }
     })
 })
@@ -266,7 +270,6 @@ const iframe = document.querySelector('iframe');
 
 run.addEventListener('click', handleRunBtn);
 
-
 async function handleRunBtn() {
     let code = Editor.getValue();
     if(code) {
@@ -307,3 +310,19 @@ async function handleRunBtn() {
         iframe.contentWindow.location.reload();
     }
 }
+
+const reloadBtn = document.querySelector('.reload');
+reloadBtn.addEventListener('click', () => [
+    Editor.setValue(startingCode)
+])
+
+const copyBtn = document.querySelector('.copy');
+copyBtn.addEventListener('click', () => {
+    let textToCopy = Editor.getValue();
+    let tempTextarea = document.createElement("textarea");
+    tempTextarea.value = textToCopy;
+    document.body.appendChild(tempTextarea);
+    tempTextarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempTextarea);
+})
