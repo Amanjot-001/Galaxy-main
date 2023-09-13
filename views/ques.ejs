@@ -94,7 +94,7 @@
                     </div>
                     
                     <div class="preview hidden">
-                        <iframe src="" frameborder="0" height="300"></iframe>
+                        <iframe src="/run" frameborder="0" height="300"></iframe>
                     </div>
 
                     <div class="solution hidden">
@@ -146,6 +146,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         const data = <%- JSON.stringify(data) %>;
+        const userData = <%- JSON.stringify(user) %>;
     </script>
     <script src="/scripts/script.js"></script>
 

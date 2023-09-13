@@ -60,7 +60,25 @@ const UserSchema = new mongoose.Schema({
     mentor: String,
     team: String,
     work: String,
-    projects: String
+    projects: [
+        {
+            name: String,
+            questions: [
+                {
+                    editor: {
+                        html: String,
+                        css: String,
+                        js: String
+                    },
+                    submissions: [
+                        {
+                            type: String
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 })
 
 const UserProjectsDataSchema = new mongoose.Schema({
@@ -69,12 +87,14 @@ const UserProjectsDataSchema = new mongoose.Schema({
             name: String,
             questions: [
                 {
-                    html: String,
-                    css: String,
-                    js: String,
+                    editor: {
+                        html: String,
+                        css: String,
+                        js: String
+                    },
                     submissions: [
                         {
-                            sub: String
+                            type: String
                         }
                     ]
                 }
@@ -86,6 +106,8 @@ const UserProjectsDataSchema = new mongoose.Schema({
 const Projects = mongoose.model('Projects', ProjectsSchema);
 const User = mongoose.model('User',  UserSchema);
 const UserProjectsData = mongoose.model('UserProjectsData', UserProjectsDataSchema);
+
+// UserProjectsData.updateMany({})
 
 
 const projectData = new Projects({
@@ -412,6 +434,5 @@ const projectData = new Projects({
 
 module.exports = {
     Projects,
-    User,
     UserProjectsData
   };

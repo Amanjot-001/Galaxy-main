@@ -1,7 +1,9 @@
-let editor = ace.edit("editor");
-editor.setTheme("ace/theme/eclipse");
-editor.setOption('enableLiveAutocompletion', true);
-editor.session.setMode("ace/mode/html");
+// const { addCommentsInHtml, addCommentsInCss, addCommentsInJs } = require('E:\Galaxy-main\comments.js')
+
+let Editor = ace.edit("editor");
+Editor.setTheme("ace/theme/eclipse");
+Editor.setOption('enableLiveAutocompletion', true);
+Editor.session.setMode("ace/mode/html");
 
 let exEditor = ace.edit("ex-editor");
 exEditor.setTheme("ace/theme/dracula");
@@ -11,7 +13,28 @@ let solEditor = ace.edit("sol-editor");
 solEditor.setTheme("ace/theme/dracula");
 solEditor.setReadOnly(true);
 
-// editor.setValue(`<div class="calculator-card">\n\t<div class="display">\n\t</div>\n\t<div class="buttons">\n\t</div>\n</div>`);
+const currentURL = window.location.href;
+const parts = currentURL.split('/');
+let quesNumber = parts[parts.length - 1];
+const lang = data[0].lang;
+const preCode = userData.projects[0].questions[quesNumber-1].editor;
+
+console.log(preCode.html)
+
+// if(lang == 'html') {
+//     editor.setValue(preCode.html);
+// }
+// else if(lang == 'css') {
+//     editor.setValue(preCode.css);
+// }
+// else {
+//     editor.setValue(preCode.js);
+// }
+
+Editor.setValue(preCode[lang]);
+Editor.session.setMode(`ace/mode/${data[0].lang}`);
+Editor.clearSelection();
+
 
 exEditor.session.setMode(`ace/mode/${data[0].lang}`);
 exEditor.setValue(data[0].example);
@@ -24,6 +47,45 @@ exEditor.renderer.$cursorLayer.element.style.opacity = 0;
 solEditor.clearSelection();
 solEditor.renderer.$cursorLayer.element.style.opacity = 0
 
+
+document.addEventListener('DOMContentLoaded', async () => {
+    let playerSubmissionLen = (userData.projects[0].questions[quesNumber-1].submissions).length;
+    let code = '';
+
+    var commentFunctions = {
+        html: addCommentsInHtml,
+        css: addCommentsInCss,
+        js: addCommentsInJs
+    };   
+
+    if(lang == 'html')
+        code = commentFunctions[lang](userData.projects[0].questions[quesNumber-1].editor[lang], data[0].selectedClassForHtml, playerSubmissionLen);
+    else if(lang == 'css')
+        code = commentFunctions[lang](userData.projects[0].questions[quesNumber-1].editor[lang], playerSubmissionLen);
+    else {
+        code = commentFunctions.js(userData.projects[0].questions[quesNumber-1].editor[lang], playerSubmissionLen);
+
+    }
+    prettierReq(code);
+})
+
+
+async function prettierReq(code) {
+    await fetch('/p', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            code: code,
+            lang: lang
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+    Editor.setValue(data);
+    });
+}
 
 const btnHeight = document.querySelector('.example-btn').offsetHeight;
 
@@ -63,9 +125,6 @@ function updatearrow(index) {
 const prevBtn = document.querySelector('.move-btns span:first-child');
 prevBtn.addEventListener('click', handlePrevBtn)
 function handlePrevBtn() {
-    const currentURL = window.location.href;
-    const parts = currentURL.split('/');
-    let quesNumber = parts[parts.length - 1];
 
     const lastIndex = currentURL.lastIndexOf('/');
     const str = currentURL.substring(0, lastIndex);
@@ -80,9 +139,9 @@ function handlePrevBtn() {
 const nextBtn = document.querySelector('.move-btns span:last-child');
 nextBtn.addEventListener('click', handleNextBtn);
 function handleNextBtn() {
-    const currentURL = window.location.href;
-    const parts = currentURL.split('/');
-    let quesNumber = parts[parts.length - 1];
+    // const currentURL = window.location.href;
+    // const parts = currentURL.split('/');
+    // let quesNumber = parts[parts.length - 1];
 
     const lastIndex = currentURL.lastIndexOf('/');
     const str = currentURL.substring(0, lastIndex);
@@ -91,7 +150,6 @@ function handleNextBtn() {
         window.location.href = newurl;
 }
 
-const lang = data[0].lang;
 
 let cache = "";
 let type=lang;
@@ -109,7 +167,7 @@ async function handleSubmitBtn() {
     if(type !== lang)
         codeToSend = cache;
     else
-        codeToSend = editor.getValue();
+        codeToSend = Editor.getValue();
 
     console.log(codeToSend);
     await fetch(`/${project}/questions/${questionNumber}/submitData`, {
@@ -130,16 +188,122 @@ tabs.forEach(btn => {
     btn.addEventListener('click', (e)=> {
         const classNames = e.target.className.split(' ');
         type = classNames[0];
-        editor.session.setMode(`ace/mode/${type}`);
+        Editor.session.setMode(`ace/mode/${type}`);
         if(type != lang) {
             if(cacheFlag)
-                cache = editor.getValue();
+                cache = Editor.getValue();
             cacheFlag = false;
-            editor.setValue(userData.type);
+            Editor.setValue(userData.projects[0].questions[quesNumber-1].editor[type]);
         }
         else{
-            editor.setValue(cache);
+            Editor.setValue(cache);
             cacheFlag=true;
         }
     })
 })
+
+
+
+
+
+
+
+function addCommentsInHtml(str, Sclass, playerSubmissionLen) {
+    if(Sclass && playerSubmissionLen == 0) {
+        str = removeCommentsinHtml(str);
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = `${str}`;
+        // console.log(Sclass)
+        // console.log(tempDiv.innerHTML);
+        const selectedClass = tempDiv.querySelector(`.${Sclass}`);
+        if(selectedClass)
+            selectedClass.innerHTML = '\n<!-- Write your code here -->\n';
+        // console.log(tempDiv.innerHTML);
+        return `<body>  ${tempDiv.innerHTML} </body>`;
+    }
+    else
+        return str;
+}
+
+function addCommentsInCss(str, playerSubmissionLen) {
+    if(playerSubmissionLen == 0) {
+        str = removeCommentsInCss(str);
+        str = ` ${str} \n\n/* Write your code here */ \n`;
+        return str;
+    }
+    else 
+        return str;
+}
+
+function addCommentsInJs(str, playerSubmissionLen) {
+    if(playerSubmissionLen == 0) {
+        console.log("in")
+        str = removeCommentsInJs(str);
+        str = ` ${str} \n\n/* Write your code here */ \n`;
+        return str;
+    }
+    else
+        return str;
+}
+
+function removeCommentsinHtml(str) {
+    const regex = /<!--\s*Write your code here\s*-->/g;
+    return str.replace(regex, '');
+}
+
+function removeCommentsInCss(str) {
+    const regex = /\/\*[\s\S]*?\*\//g;
+    return str.replace(regex, '');
+}
+
+function removeCommentsInJs(str) {
+    const regex = /\/\/.*?$|\/\*[\s\S]*?\*\//gm;
+    return str.replace(regex, '');
+}
+
+const run = document.querySelector('.run-btn');
+const iframe = document.querySelector('iframe');
+
+run.addEventListener('click', handleRunBtn);
+
+
+async function handleRunBtn() {
+    let code = Editor.getValue();
+    if(code) {
+        prettierReq(code);
+    
+        let htmlCode = '', cssCode = '', jsCode = '';
+        if(lang == 'html') {
+            htmlCode = Editor.getValue();
+            console.log(userData.projects[0].questions[quesNumber-1].editor['css'])
+            cssCode = userData.projects[0].questions[quesNumber-1].editor['css'];
+            jsCode = userData.projects[0].questions[quesNumber-1].editor['js'];
+        }
+        else if(lang == 'css') {
+            htmlCode = userData.projects[0].questions[quesNumber-1].editor['html'];
+            cssCode = Editor.getValue();
+            jsCode = userData.projects[0].questions[quesNumber-1].editor['js'];
+        }
+        else {
+            htmlCode = userData.projects[0].questions[quesNumber-1].editor['html'];
+            cssCode = userData.projects[0].questions[quesNumber-1].editor['css'];
+            jsCode = Editor.getValue();
+        }
+    
+        await fetch('/handleRunBtn', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                quesNo: quesNumber-1,
+                lang: lang,
+                html: htmlCode,
+                css: cssCode,
+                js: jsCode,
+            })
+        })
+    
+        iframe.contentWindow.location.reload();
+    }
+}
