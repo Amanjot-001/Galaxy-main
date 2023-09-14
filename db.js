@@ -142,13 +142,15 @@ const projectData = new Projects({
                     difficulty: 'Easy',
                     preview: false,
                     lang: 'html',
+                    like: 0,
+                    dislike: 0
                 },
                 {
                     quesNumber: 2,
                     heading: 'Adding buttons in Calculator.',
                     info:
                         `<p> As part of the calculator card creation, you are required to initialize and include 20 button elements inside the <code>div</code> element with the class name "buttons". These buttons will provide functionality for various operations and numerical inputs in the calculator.
-                        Each button should have a specific content associated with it. The content of the buttons should be initialized in the following order:</p>
+                        Each button should have a specific content associated with it. The content of the buttons should be initialized in the following order:</p><br><br>
                         <ul>
                             <li>"AC" - Represents the clear all (reset) functionality.</li>
                             <li>"DEL" - Represents the delete (backspace) functionality.</li>
@@ -173,11 +175,13 @@ const projectData = new Projects({
                         </ul> 
                         <p>By including these 20 button elements within the "buttons" <code>div</code>, you will provide users with a comprehensive set of options to perform various mathematical operations and numerical inputs on the calculator interface.</p>`,
                     example: '\n<!-- How to create button elements -->\n<button> AC </button>',
-                    solution: '\n<!-- This is how you can go about implementing this-->\n<div class="buttons">\n\t<button>AC</button>\n\t<button>DEL</button>\n\t<button>%</button>\n\t<button>/</button>\n\t<button>7</button>\n\t<button>8</button>\n\t<button>9</button>\n\t<button>*</button>\n\t<button>4</button>\n\t<button>5</button>\n\t<button>6</button>\n\t<button>-</button>\n\t<button>1</button>\n\t<button>2</button>\n\t<button>3</button>\n\t<button>+</button>\n\t<button>^</button>\n\t<button>0</button>\n\t<button>.</button>\n\t<button>=</button>\n</div>',
+                    solution: '\n<!-- This is how you can go about implementing this-->\n<div class="buttons">\n\t<button> AC </button>\n\t<button> DEL </button>\n\t<button> % </button>\n\t<button> / </button>\n\t<button> 7 </button>\n\t<button> 8 </button>\n\t<button> 9 </button>\n\t<button> * </button>\n\t<button> 4 </button>\n\t<button> 5 </button>\n\t<button> 6 </button>\n\t<button> - </button>\n\t<button> 1 </button>\n\t<button> 2 </button>\n\t<button> 3 </button>\n\t<button> + </button>\n\t<button> ^ </button>\n\t<button> 0 </button>\n\t<button> . </button>\n\t<button> = </button>\n</div>',
                     difficulty: 'Easy',
                     preview: false,
                     lang: 'html',
-                    selectedClassForHtml: 'buttons'
+                    selectedClassForHtml: 'buttons',
+                    like: 0,
+                    dislike: 0
                 },
                 {
                     quesNumber: 3,
