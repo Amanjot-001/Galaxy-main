@@ -226,15 +226,15 @@ main {
 }
 
 .inner-1 .normal .view {
-    width: 80%;
-    height: 80%;
-    border: 2px solid black;
+    width: 90%;
+    height: 90%;
+    border: 3px solid black;
     border-radius: 5px;
-    box-shadow: -5px 5px 10px black;
+    box-shadow: -7px 7px 12px black;
 }
 
 iframe {
-    /* background-color: rgba(239,239,239); */
+    background-color: white;
     height: 100%;
     width: 100%;
 }

@@ -134,17 +134,17 @@ app.get('/:projectName/questions/:questionNumber', async(req,res) => {
 app.post('/p', async (req, res) => {
     let code = req.body.code;
     let lang = req.body.lang;
-    if(lang == 'javascript') lang = 'js';
+    // if(lang == 'javascript') lang = 'js';
     const formattedCode = await prettier.format(code, {
         parser: lang,
         semi: false,
         singleQuote: true,
         trailingComma: 'es5',
-        printWidth: 80, // Set the desired line width for indentation
-        htmlWhitespaceSensitivity: 'ignore', // Ignore HTML indentation rules
-        embeddedLanguageFormatting: 'off', // Disable formatting for embedded languages
+        printWidth: 80,
+        htmlWhitespaceSensitivity: 'ignore',
+        embeddedLanguageFormatting: 'off',
     });
-    // console.log(formattedCode);
+    console.log(formattedCode);
     res.json(formattedCode);
 });
 
@@ -201,6 +201,98 @@ app.post('/handleRunBtn', async (req, res) => {
     res.sendStatus(200);
 })
 
+app.post('/handleRun-codeplay', async (req, res) => {
+    let html = req.body.html;
+    const css = req.body.css;
+    const js = req.body.js;
+    const lang = req.body.lang;
+
+    html = `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Project</title>
+        <link rel="stylesheet" href="/styles/codePlay-render.css">
+        <script src="/scripts/codePlay-render.js"></script>
+    </head>
+    <body>` + html + 
+    `</body>
+    </html>`;
+
+    writeHtml();
+    writeCss();
+    writeJs();
+
+    function writeHtml () {
+        fs.writeFile('./views/codePlay-render.ejs', html, (err) => {
+            if (err) {
+            console.error(err);
+            } else {
+            console.log('Html File successfully written');
+            }
+        });
+    }
+
+    function writeCss () {
+        fs.writeFile('./styles/codePlay-render.css', css, (err) => {
+            if (err) {
+            console.error(err);
+            } else {
+            console.log('Css File successfully written');
+            }
+        });
+    }
+
+    function writeJs () {
+        fs.writeFile('./scripts/codePlay-render.js', js, (err) => {
+            if (err) {
+            console.error(err);
+            } else {
+            console.log('Js File successfully written');
+            }
+        });
+    }
+    res.sendStatus(200);
+})
+
+app.post('/clear-codeplay', async(req, res) => {
+    clearHtml();
+    clearCss();
+    clearJs();
+
+    function clearHtml() {
+        fs.writeFile('./views/codePlay-render.ejs', '', (err) => {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log(`html successfully cleared`);
+            }
+        });
+    }
+    
+    function clearCss() {
+        fs.writeFile('./styles/codePlay-render.css', '', (err) => {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log(`css successfully cleared`);
+            }
+        });
+    }
+    
+    function clearJs() {
+        fs.writeFile('./scripts/codePlay-render.js', '', (err) => {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log(`js successfully cleared`);
+            }
+        });
+    }
+
+    res.sendStatus(200);
+})
 
 app.post('/loadData', async(req, res) => {
     let data = await Projects.findOne(
@@ -638,6 +730,10 @@ app.get('/codePlay', async(req, res) => {
 
 app.get('/Calculator/Questions', (req, res) => {
     res.render('viewQues');
+})
+
+app.get('/codePlay-run', (req, res) => {
+    res.render('codePlay-render')
 })
 app.listen(8080, () => {
     console.log('Server is running on port 8080');
