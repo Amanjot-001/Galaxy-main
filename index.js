@@ -735,6 +735,11 @@ app.get('/Calculator/Questions', (req, res) => {
 app.get('/codePlay-run', (req, res) => {
     res.render('codePlay-render')
 })
+
+app.get('/preview', async(req, res)=> {
+    res.render('codePlay-render');
+})
+
 app.listen(8080, () => {
     console.log('Server is running on port 8080');
 });

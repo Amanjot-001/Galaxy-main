@@ -87,3 +87,24 @@ async function prettierReq(code) {
         });
     }
 }
+
+const copyBtn = document.querySelector('.copy');
+copyBtn.addEventListener('click', () => {
+    let textToCopy = Editor.getValue();
+    let tempTextarea = document.createElement("textarea");
+    tempTextarea.value = textToCopy;
+    document.body.appendChild(tempTextarea);
+    tempTextarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempTextarea);
+})
+
+const fullBtn = document.querySelector('.fullscreen-btn');
+fullBtn.addEventListener('click', ()=> {
+    if (!window.fullWindow || window.fullWindow.closed) {
+        window.fullWindow = window.open('/preview', '_blank');
+      } else {
+        window.fullWindow.focus();
+        fullWindow.location.reload();
+      }
+})

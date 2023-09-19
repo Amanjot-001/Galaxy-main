@@ -216,6 +216,14 @@ main {
 .fullscreen-btn {
     margin-right: 1rem;
     cursor: pointer;
+    
+    &:hover {
+        color: black;
+
+        >i {
+            color: #ff4d00 !important;
+        }
+    }
 }
 
 .inner-1 .normal {
@@ -237,4 +245,12 @@ iframe {
     background-color: white;
     height: 100%;
     width: 100%;
+}
+
+.editor-icons {
+    >span i {
+        &:hover {
+            color: #ff4d00 !important;
+        }
+    }
 }
