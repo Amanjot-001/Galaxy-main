@@ -1,4 +1,3 @@
-const { Projects, UserProjectsData } = require('E:/editor page/db.js');
 // const { Configuration, OpenAIApi } = require('openai');
 const express = require('express');
 const app = express();
@@ -10,7 +9,17 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const prettier = require("prettier");
 const fs = require('fs');
+const moment = require('moment');
 const cookieParser = require('cookie-parser');
+const { 
+    Projects, 
+    UserSchema, 
+    UserProjectsDataSchema, 
+    ProjectUploadSchema,
+    PersonalProjectsData,
+    typingResults 
+    } = require('./db');
+
 
 // const configuration = new Configuration({
 //     apiKey: process.env.API_KEY
@@ -18,8 +27,6 @@ const cookieParser = require('cookie-parser');
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
-
-
 
 app.use("/styles", express.static(__dirname + "/styles"));
 app.use("/scripts", express.static(__dirname + "/scripts"));
@@ -36,54 +43,14 @@ mongoose.connect(process.env.MONGO_PROD_URL)
     .then(() => console.log('connected db'));
 
 
+// const User = mongoose.model('User',  UserSchema);
+const User = mongoose.model('User',  UserSchema);
+const UserQuestionsData = mongoose.model('UserQuestionsData', UserProjectsDataSchema);
+const UserProjectsUpload = mongoose.model('UserProjectsUpload', ProjectUploadSchema);
+const UserPersonalProjects = mongoose.model('UserPersonalProjects', PersonalProjectsData);
+const UserTypingResult = mongoose.model('UserTypingResult', typingResults);
 
-    const UserSchema = new mongoose.Schema({
-        username: {
-            type: String,
-            unique: true,
-            required: [true, 'Username cannot be blank']
-        },
-        name: {
-            type: String,
-            required: [true, 'Name cannot be blank']
-          },
-        mail: {
-            type: String,
-            required: [true, 'mail cannot be blank']
-          },
-        pass: {
-            type: String,
-            required: [true, 'password cannot be blank']
-          },
-        college: {
-            type: String,
-            required: [true, 'college name cannot be blank']
-          },
-        mentor: String,
-        team: String,
-        work: String,
-        projects: [
-            {
-                name: String,
-                questions: [
-                    {
-                        editor: {
-                            html: String,
-                            css: String,
-                            js: String
-                        },
-                        submissions: [
-                            {
-                                type: String
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    })
-
-    const User = mongoose.model('User',  UserSchema);
+let sessionId;
 
 app.get('/data', async (req,res) => {
     const data = await Projects.find({});
@@ -100,35 +67,21 @@ app.get('/delete', async(req, res) => {
     res.sendStatus(200)
 })
 
-let sessionId;
-
 app.get('/:projectName/questions/:questionNumber', async(req,res) => {
     sessionId = req.cookies.userId;
     const user = await User.findById(sessionId);
-    // let projectID = user.projects;
-    const quesNumber = req.params.questionNumber;
+    let questionId = user.userQuestionsData;
+    const quesNumber = req.params.questionNumber; 
     const projectName = "Calculator";
-    // const userData = await UserProjectsData.findOne(
-    //     { _id: projectID, "projects.name": projectName },
-    //     { "projects.questions": { $slice: [quesNumber - 1, 1] } }
-    // );
-    // let userData = await UserProjectsData.findOne(
-    //     {
-    //       _id: projectID,
-    //       "projects.name": projectName
-    //     }
-    // );    
-    // const projectName = req.params.projectName; 
-    // const quesNumber = "1";
+
+    const questionsData = await UserQuestionsData.findById(questionId);
 
     let data = await Projects.findOne(
         { 'project.name': projectName },
         { 'project.questions': { $slice: [quesNumber - 1, 1] } }
     );
     data = data.project[0].questions;
-    // userData = userData.projects[0].questions[quesNumber-1];
-    // res.send(userData.projects[0].questions[quesNumber-1])
-    res.render('ques', {data, user});
+    res.render('ques', {data, questionsData});
 })
 
 app.post('/p', async (req, res) => {
@@ -144,7 +97,7 @@ app.post('/p', async (req, res) => {
         htmlWhitespaceSensitivity: 'ignore',
         embeddedLanguageFormatting: 'off',
     });
-    console.log(formattedCode);
+    // console.log(formattedCode);
     res.json(formattedCode);
 });
 
@@ -304,14 +257,16 @@ app.post('/loadData', async(req, res) => {
     res.json(data);
 })
 
-app.get('/createUser', async(req, res) => {
-    
-    const user = new User({
-        username: "aman",
-        name: "amanjot",
-        mail: "aman",
-        pass: "1234",
-        college: "mietGANDU",
+app.post('/createUser', async(req, res) => {
+
+    let email = req.body.email;
+    let pass = req.body.pass;
+    let rollNo = req.body.roll;
+    let clg = req.body.clg;
+    let userName = req.body.userName;
+    let uName = req.body.name;
+
+    const questionsData = new UserQuestionsData({
         projects: [
             {
                 name: 'Calculator',
@@ -327,13 +282,26 @@ app.get('/createUser', async(req, res) => {
                 ]
             }
         ]
+    })
+
+    await questionsData.save();
+    const questionsId = questionsData._id;
+    
+    const user = new User({
+        username: userName,
+        name: uName,
+        mail: email,
+        pass: pass,
+        college: clg,
+        rollNo: rollNo,
+        userQuestionsData: questionsId,
     });
     
     await user.save();
-    const U = await User.findById(user._id);
-
+    // const U = await User.findById(user._id);
+    const userId = user._id;
     
-    res.cookie('userId', U._id, { maxAge: 30 * 24 * 60 * 60 * 1000 });
+    res.cookie('userId', userId, { maxAge: 30 * 24 * 60 * 60 * 1000 });
 
     res.sendStatus(200);
 })
@@ -674,8 +642,9 @@ app.get('/delProjectsData', async(req, res)=> {
 
 app.get('/find', async(req, res) => {
     const user = await User.find({});
-    // const userData = await UserProjectsData.find({})
-    res.send(user);
+    const questionsData = await UserQuestionsData.findById("650a9c8cae1217953786746b");
+    // res.send(questionsData);
+    res.send(user)
 })
 
 app.post('/:projectName/questions/:questionNumber/submitData', async (req, res) => {
@@ -683,21 +652,17 @@ app.post('/:projectName/questions/:questionNumber/submitData', async (req, res) 
     const lang = req.body.lang;
     const quesNumber = req.params.questionNumber;
     const projectName = "Calculator";
-    // console.log(code);
-    // console.log(quesNumber);
 
-    const UserData = await User.findOne({name: "amanjot"});
+    const UserData = await User.findById(sessionId);
+    const questionsId = UserData.userQuestionsData;
 
-    console.log(UserData);
-    // console.log(UserDataData);
-    let currQues = UserData.projects[0].questions[quesNumber-1];
-    console.log(currQues);
-    let nextQues = UserData.projects[0].questions[quesNumber];
+    const questionsData = await UserQuestionsData.findById(questionsId);
+
+    let currQues = questionsData.projects[0].questions[quesNumber-1];
+    let nextQues = questionsData.projects[0].questions[quesNumber];
     currQues.editor[lang] = code;
-    // console.log(UserDataData)
-    // currQues.lang = code;
+
     currQues.submissions.push(`${code}`);
-    // console.log(currQues.submissions);
 
     if(!nextQues) {
         const newQuestion = {
@@ -712,10 +677,10 @@ app.post('/:projectName/questions/:questionNumber/submitData', async (req, res) 
         newQuestion.editor.css = currQues.editor.css;
         newQuestion.editor.js = currQues.editor.js;
 
-        UserData.projects[0].questions.push(newQuestion);
+        questionsData.projects[0].questions.push(newQuestion);
     }
 
-    await UserData.save();
+    await questionsData.save();
     res.sendStatus(200);
 })
 
@@ -738,6 +703,10 @@ app.get('/codePlay-run', (req, res) => {
 
 app.get('/preview', async(req, res)=> {
     res.render('codePlay-render');
+})
+
+app.get('/login', (req,res) => {
+    res.render('login');
 })
 
 app.listen(8080, () => {

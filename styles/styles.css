@@ -222,10 +222,16 @@ main {
     gap: 0.5rem;
     margin-right: 1rem;
     font-size: 0.6rem;
-}
 
-.editor-icons span {
-    cursor: pointer;
+    >span {
+        cursor: pointer;
+        >i {
+            &:hover {
+                color: #ff4d00 !important;
+            }
+        }
+    }
+
 }
 
 .tab-selected {
@@ -421,7 +427,8 @@ code {
     height: 40%;
     border: 2px solid black;
     border-radius: 5px;
-    box-shadow: -5px 5px 10px black;
+    box-shadow: -7px 7px 12px black;
+    background-color: white;
 }
 
 .inner-1 .medium .solution {
@@ -475,10 +482,17 @@ code {
     display: flex;
     gap: 1rem;
     font-size: 0.7rem;
-}
 
-.medium .right div {
-    cursor: pointer;
+    >div {
+        cursor: pointer;
+        >i {
+            margin-right: 0.1rem;
+        }
+
+        >.fa-share:hover {
+            color: #ff4d00 !important;
+        }
+    }
 }
 
 .hint {

@@ -17,6 +17,7 @@ const currentURL = window.location.href;
 const parts = currentURL.split('/');
 let quesNumber = parts[parts.length - 1];
 const lang = data[0].lang;
+console.log(userData);
 const preCode = userData.projects[0].questions[quesNumber-1].editor;
 
 console.log(preCode.html)

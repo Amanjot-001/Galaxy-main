@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const moment = require('moment');
 
 mongoose.connect(process.env.MONGO_PROD_URL)
     .then(() => console.log('connected db2'));
@@ -57,28 +58,14 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'college name cannot be blank']
       },
-    mentor: String,
-    team: String,
-    work: String,
-    projects: [
-        {
-            name: String,
-            questions: [
-                {
-                    editor: {
-                        html: String,
-                        css: String,
-                        js: String
-                    },
-                    submissions: [
-                        {
-                            type: String
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+    rollNo: {
+        type: String,
+        required: [true, 'Roll number cannot be blank']
+    },
+    userQuestionsData: String,
+    ProjectUploadData: String,
+    PersonalProjectData: String,
+    typingResults: String
 })
 
 const UserProjectsDataSchema = new mongoose.Schema({
@@ -103,9 +90,99 @@ const UserProjectsDataSchema = new mongoose.Schema({
     ]
 })
 
+const ProjectUploadSchema = new mongoose.Schema({
+    uploads: [
+        {
+            title: {
+                type: String,
+                unique: true
+            },
+            desc: {
+                type: String,
+                maxlength: 200,
+              },
+            github: String,
+            website: String,
+            date: {
+                type: String,
+                default: moment().format('YYYY MM DD')
+            },
+            team: {
+                type: [{
+                    username: String,
+                }],
+                // validate: [arrayLimit, '{PATH} exceeds the limit of 4'],
+                maxItems: 4, 
+            },
+            tech: [
+                {
+                    name: String
+                }
+            ],
+            mentor: {
+                type: [{
+                    username: String,
+                }],
+                // validate: [arrayLimit, '{PATH} exceeds the limit of 2'],
+                maxItems: 2,
+            }
+        }
+    ]
+})
+
+const PersonalProjectsData = new mongoose.Schema({
+    creations: [
+        {
+            title: {
+                type: String,
+                unique: true
+            },
+            code: {
+                html: String,
+                css: String,
+                js: String
+            },
+            date: {
+                type: String,
+                default: moment().format('YYYY MM DD')
+            }
+        }
+    ]
+})
+
+const typingResults = new mongoose.Schema({
+    score: [
+        {
+          wpm: {
+            type: String
+          },
+          accuracy: {
+            type: String
+          },
+          date: {
+            type: String,
+            default: moment().format('YYYY MM DD')
+          }
+        }
+    ],
+    bestScore: {
+        type: Number,
+        default: 0
+    },
+    testsTaken: {
+        type: Number,
+        default: 0
+    },
+    rank: {
+        type: Number,
+        default: 0
+    }
+})
+
+
 const Projects = mongoose.model('Projects', ProjectsSchema);
-const User = mongoose.model('User',  UserSchema);
-const UserProjectsData = mongoose.model('UserProjectsData', UserProjectsDataSchema);
+// const User = mongoose.model('User',  UserSchema);
+// const UserProjectsData = mongoose.model('UserProjectsData', UserProjectsDataSchema);
 
 // UserProjectsData.updateMany({})
 
@@ -438,5 +515,9 @@ const projectData = new Projects({
 
 module.exports = {
     Projects,
-    UserProjectsData
+    UserSchema,
+    UserProjectsDataSchema,
+    ProjectUploadSchema,
+    PersonalProjectsData,
+    typingResults
   };
