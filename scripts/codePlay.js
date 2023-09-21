@@ -42,9 +42,14 @@ tabs.forEach(btn => {
     })
 })
 
+let debounceTimeout;
+
 Editor.getSession().on('change', function() {
     cache[lang] = Editor.getValue();
-    handleRunBtn();
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+        handleRunBtn();
+    }, 1000);
 });
 
 runBtn.addEventListener('click', handleRunBtn);
