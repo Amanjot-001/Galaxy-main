@@ -44,6 +44,7 @@ tabs.forEach(btn => {
 
 Editor.getSession().on('change', function() {
     cache[lang] = Editor.getValue();
+    handleRunBtn();
 });
 
 runBtn.addEventListener('click', handleRunBtn);
@@ -59,7 +60,6 @@ async function handleRunBtn() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            lang: lang,
             html: cache.html,
             css: cache.css,
             js: cache.javascript,
@@ -108,3 +108,23 @@ fullBtn.addEventListener('click', ()=> {
         fullWindow.location.reload();
       }
 })
+
+const saveBtn = document.querySelector('.submit-btn');
+saveBtn.addEventListener('click', handleSaveBtn);
+
+const title = document.querySelector('.title').textContent;
+
+async function handleSaveBtn() {
+    await fetch('/handleSave-codeplay', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title: title,
+            html: cache.html,
+            css: cache.css,
+            js: cache.javascript,
+        })
+    })
+}

@@ -158,7 +158,6 @@ app.post('/handleRun-codeplay', async (req, res) => {
     let html = req.body.html;
     const css = req.body.css;
     const js = req.body.js;
-    const lang = req.body.lang;
 
     html = `<!DOCTYPE html>
     <html lang="en">
@@ -295,6 +294,7 @@ app.post('/createUser', async(req, res) => {
         college: clg,
         rollNo: rollNo,
         userQuestionsData: questionsId,
+        PersonalProjectData: ''
     });
     
     await user.save();
@@ -302,7 +302,7 @@ app.post('/createUser', async(req, res) => {
     const userId = user._id;
     
     res.cookie('userId', userId, { maxAge: 30 * 24 * 60 * 60 * 1000 });
-
+    sessionId = req.cookies.userId;
     res.sendStatus(200);
 })
 
@@ -642,9 +642,11 @@ app.get('/delProjectsData', async(req, res)=> {
 
 app.get('/find', async(req, res) => {
     const user = await User.find({});
-    const questionsData = await UserQuestionsData.findById("650a9c8cae1217953786746b");
+    const questionsData = await UserQuestionsData.findById("650ae77124925ddbcd092c18");
+    const personalData = await UserPersonalProjects.findById("650c0c89387f1a2f7396ce2d")
     // res.send(questionsData);
-    res.send(user)
+    res.send(personalData)
+    // res.send(user)
 })
 
 app.post('/:projectName/questions/:questionNumber/submitData', async (req, res) => {
@@ -699,6 +701,60 @@ app.get('/Calculator/Questions', (req, res) => {
 
 app.get('/codePlay-run', (req, res) => {
     res.render('codePlay-render')
+})
+
+app.post('/handleSave-codeplay', async(req, res) => {
+    let projectTitle = req.body.title;
+    const htmlCode = req.body.html;
+    const cssCode = req.body.css;
+    const jsCode = req.body.js;
+
+    projectTitle = projectTitle.replace(/\s+/g, " ").trim();
+
+    sessionId = req.cookies.userId;
+    const UserData = await User.findById(sessionId);
+    let PersonalProjectsId = UserData.PersonalProjectData;
+
+    if(PersonalProjectsId === '') {
+        const personalProjects = new UserPersonalProjects({
+            creations: [
+                {
+                    title: projectTitle,
+                    code: {
+                        html: htmlCode,
+                        css: cssCode,
+                        js: jsCode
+                    }
+                }
+            ]
+        })
+
+        personalProjects.save();
+
+        PersonalProjectsId = personalProjects._id;
+        UserData.PersonalProjectData = personalProjects._id;
+        UserData.save();
+    }
+    else {
+        const personalProjects = await UserPersonalProjects.findById(PersonalProjectsId);
+
+        const newCreation = {
+            title: projectTitle,
+            code: {
+                html: '',
+                css: '',
+                js: ''
+            }
+        }
+
+        newCreation.code.html = htmlCode;
+        newCreation.code.css = cssCode;
+        newCreation.code.js = jsCode;
+
+        personalProjects.creations.push(newCreation);
+        personalProjects.save();
+    }
+    res.sendStatus(200);
 })
 
 app.get('/preview', async(req, res)=> {

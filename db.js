@@ -103,6 +103,10 @@ const ProjectUploadSchema = new mongoose.Schema({
               },
             github: String,
             website: String,
+            image: {
+                data: Buffer, 
+                contentType: String,
+            },
             date: {
                 type: String,
                 default: moment().format('YYYY MM DD')
