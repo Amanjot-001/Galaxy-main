@@ -765,6 +765,10 @@ app.get('/login', (req,res) => {
     res.render('login');
 })
 
+app.get('/create', async(req, res) => {
+    res.render('create');
+})
+
 app.listen(8080, () => {
     console.log('Server is running on port 8080');
 });
