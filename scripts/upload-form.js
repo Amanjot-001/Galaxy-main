@@ -63,7 +63,7 @@ continueBtn2.addEventListener('click', () => {
         gitInput.setAttribute('placeholder', 'please type in the github link for your code.')
     }
     else {
-        git = gitInput.value.replace(/\s+/g, ' ').trim();
+        github = gitInput.value.replace(/\s+/g, ' ').trim();
         content2.classList.add('hidden');
         content3.classList.remove('hidden');
     }
@@ -90,7 +90,7 @@ continueBtn4.addEventListener('click', () => {
     const techstack = techInput.querySelectorAll('.tech');
 
     techstack.forEach(text => {
-        tech.push(text.textContent);
+        tech.push(text.textContent.replace(/\s+/g, ' ').trim());
     })
 
     if(tech.length === 0){
@@ -105,6 +105,7 @@ continueBtn4.addEventListener('click', () => {
 skipBtn5.addEventListener('click', () => {
     content5.classList.add('hidden');
     content6.classList.remove('hidden');
+    saveProject();
 })
 
 
@@ -182,3 +183,19 @@ display.addEventListener('click', (event) => {
         event.target.parentElement.remove();
     }
 })
+
+async function saveProject() {
+    await fetch('/saveProject', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title: title,
+            desc: desc,
+            github: github,
+            website: website,
+            tech: tech
+        })
+    })
+}

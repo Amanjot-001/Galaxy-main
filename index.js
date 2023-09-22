@@ -294,7 +294,8 @@ app.post('/createUser', async(req, res) => {
         college: clg,
         rollNo: rollNo,
         userQuestionsData: questionsId,
-        PersonalProjectData: ''
+        PersonalProjectData: '',
+        ProjectUploadData: ''
     });
     
     await user.save();
@@ -646,7 +647,9 @@ app.get('/find', async(req, res) => {
     const personalData = await UserPersonalProjects.findById("650c0c89387f1a2f7396ce2d");
 
     const personaldatas = await UserPersonalProjects.find({});
-    res.send(personaldatas)
+    const uploads = await UserProjectsUpload.find({})
+    // res.send(personaldatas)
+    res.send(uploads)
     // res.send(questionsData);
     // res.send(personalData)
     // res.send(user)
@@ -790,6 +793,55 @@ app.post('/checkTitle', async(req, res) => {
 
 app.get('/upload', async(req, res) => {
     res.render('upload-form');
+})
+
+app.post('/saveProject', async (req, res) => {
+    const title = req.body.title;
+    const desc = req.body.desc;
+    const github = req.body.github;
+    const website = req.body.website;
+    const tech = req.body.tech;
+
+    // console.log(title, desc, github, website, tech)
+
+    sessionId = req.cookies.userId;
+    const UserData = await User.findById(sessionId);
+    let uploadsId = UserData.ProjectUploadData;
+
+    if(uploadsId === '') {
+        const ProjectUploads = new UserProjectsUpload({
+            uploads: [
+                {
+                    title: title,
+                    desc: desc,
+                    github: github,
+                    website: website,
+                }
+            ]
+        })
+
+        ProjectUploads.save();
+
+        uploadsId = ProjectUploads._id;
+        UserData.ProjectUploadData = uploadsId;
+        UserData.save();
+    }
+    else {
+        const uploadData = await UserProjectsUpload.findById(uploadsId);
+
+        const newUpload = {
+            title: title,
+            desc: desc,
+            github: github,
+            website: website,
+        }
+
+        // console.log(UserData)
+
+        uploadData.uploads.push(newUpload);
+        uploadData.save();
+    }
+    res.sendStatus(200);
 })
 
 app.listen(8080, () => {
