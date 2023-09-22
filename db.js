@@ -115,11 +115,7 @@ const ProjectUploadSchema = new mongoose.Schema({
                 // validate: [arrayLimit, '{PATH} exceeds the limit of 4'],
                 maxItems: 4, 
             },
-            tech: [
-                {
-                    name: String
-                }
-            ],
+            tech: Array,
             mentor: {
                 type: [{
                     username: String,

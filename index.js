@@ -802,8 +802,6 @@ app.post('/saveProject', async (req, res) => {
     const website = req.body.website;
     const tech = req.body.tech;
 
-    // console.log(title, desc, github, website, tech)
-
     sessionId = req.cookies.userId;
     const UserData = await User.findById(sessionId);
     let uploadsId = UserData.ProjectUploadData;
@@ -816,6 +814,7 @@ app.post('/saveProject', async (req, res) => {
                     desc: desc,
                     github: github,
                     website: website,
+                    tech: tech
                 }
             ]
         })
@@ -834,9 +833,8 @@ app.post('/saveProject', async (req, res) => {
             desc: desc,
             github: github,
             website: website,
+            tech: tech
         }
-
-        // console.log(UserData)
 
         uploadData.uploads.push(newUpload);
         uploadData.save();
