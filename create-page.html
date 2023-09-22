@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create</title>
+
+    <script src="https://kit.fontawesome.com/040eb06c51.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/create-page.css">
 </head>
 <body>
+
+    <div class="popup hidden">
+        <div class="create-form">
+            <div class="exit"><i class="fa-solid fa-xmark"></i></div>
+            <div class="greeting">Hello!</div>
+            <div class="msg"><p>Please fill in a unique title for your project.</p></div>
+            <div class="input"><input type="text" placeholder="Fill in your title"></div>
+            <div class="continue"><p>Continue</p></div>
+        </div>
+    </div>
     
     <nav>
         <div class="nav-content">
@@ -218,5 +230,6 @@
         </div>
     </main>
 
+    <script src="/scripts/create-page.js"></script>
 </body>
 </html>

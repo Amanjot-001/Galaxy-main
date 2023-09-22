@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://kit.fontawesome.com/040eb06c51.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">Galaxy</div>
+            <div class="features">
+                <a href="/">Projects</a>
+                <a href="/">Code Play</a>
+                <a href="/">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <!-- <div class="empty"></div> -->
+        <p>Your Coding Space.</p>
+    </header>
+
+    <main>
+        <div class="row-0">
+            <div class="inner-0">
+                <div class="small"></div>
+                <div class="large">
+                    <span class="editor-tabs">
+                        <span class="html tab-selected">HTML</span>
+                        <span class="css">CSS</span>
+                        <span class="javascript">JAVASCRIPT</span>
+                    </span>
+                    <span class="editor-icons">
+                        <span class="reload"><i class="fa-solid fa-rotate-right" style="color: #ffffff;"></i></span>
+                        <span class="copy"><i class="fa-regular fa-copy" style="color: #ffffff;"></i></span>
+                        <span class="settings"><i class="fa-solid fa-gear" style="color: #ffffff;"></i></span>
+                    </span>
+                </div>
+                <div class="small"></div>
+                <div class="normal">
+                    <div class="problem-list">
+                        Problem List
+                    </div>
+                </div>
+                <div class="small">
+                    <div class="ques-no">1.</div>
+                </div>
+                <div class="medium">
+                    <div class="ques-heading">Creating a simple Calculator card.</div>
+                </div>
+                <div class="small hint">
+                    <span><i class="fa-regular fa-lightbulb" style="color: #ff4d00;"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="row-1">
+            <div class="inner-1">
+                <div class="small"></div>
+                <div class="large"><div id="editor"></div></div>
+                <div class="small pointer">
+                    <div class="pointer-grid">
+                        <div class="r1">
+                            <i class="fa-solid fa-angles-right arrow" style="color: #ff4d00;"></i>
+                        </div>
+                        <div class="r2"></div>
+                        <div class="r3"></div>
+                        <div class="r4"></div>
+                        <div class="r5"></div>
+                    </div>
+                </div>
+                <div class="normal">
+                    <div class="btns">
+                        <div class="description-btn btn-selected" onmouseover="showDiv('ques-info')" data-value="1">Description</div>
+                        <div class="example-btn" onmouseover="showDiv('example')" data-value="2">Example</div>
+                        <div class="preview-btn" onmouseover="showDiv('preview')" data-value="3">Preview</div>
+                        <div class="solution-btn" onmouseover="showDiv('solution')" data-value="4">Solution</div>
+                        <div class="submission-btn" onmouseover="showDiv('submission')" data-value="5">Submissions</div>
+                    </div>
+                </div>
+                <div class="small"></div>
+                <div class="medium">
+                    <div class="ques-info">
+                        In this task, your goal is to create a user interface for a simple calculator by utilizing
+                    HTML. The calculator will be presented as a card, structured with a main <code>div</code>
+                    element having the class name <span style="color: #ff4d00;">"calculator-card"</span>. Within this card, you will need to include
+                    two additional <code>div</code> elements to organize the content. <br><br>
+                    <ul>
+                        <li> The first inner <code>div</code>, with the class name <span style="color: #ff4d00;">"display"</span> and insert "0" as
+                            default content in this div, this will serve as a container for the calculator's
+                            input field. This field will be used to display the numbers and results of
+                            calculations to the user.
+                        </li><br>
+                        <li> The second inner <code>div</code>, with the class name <span style="color: #ff4d00;">"buttons"</span>, will act as a
+                            container for the calculator's buttons. These buttons will enable users to perform
+                            basic mathematical operations such as addition, subtraction, multiplication, and
+                            division.
+                        </li>
+                    </ul>
+                    </div>
+
+                    <div class="example hidden">
+                        <div id="ex-editor"></div>
+                    </div>
+                    
+                    <div class="preview hidden">
+                        <iframe src="" frameborder="0" height="300"></iframe>
+                    </div>
+
+                    <div class="solution hidden">
+                        <div id="sol-editor"></div>
+                    </div>
+
+                    <div class="submission hidden"></div>
+                </div>
+                <div class="small"></div>
+            </div>
+        </div>
+        <div class="row-2">
+            <div class="inner-2">
+                <div class="small"></div>
+                <div class="large">
+                        <div class="console">Console <i class="fa-solid fa-terminal" style="color: #ff4d00;"></i></div>
+                        <div class="right">
+                            <div class="run-btn">Run <i class="fa-solid fa-circle-check" style="color: #ff4d00;"></i></div>
+                            <div class="submit-btn">Submit <i class="fa-solid fa-right-to-bracket"
+                                    style="color: #ff4d00;"></i></div>
+                        </div>
+                </div>
+                <div class="small"></div>
+                <div class="normal">
+                    <div class="move-btns">
+                        <span>PREV</span>
+                        <span>NEXT</span>
+                    </div>
+                </div>
+                <div class="small"></div>
+                <div class="medium">
+                    <div class="difficulty">Easy</div>
+                    <div class="right">
+                        <div class="like"><i class="fa-regular fa-thumbs-up" style="color: #ff4d00;"></i>100</div>
+                        <div class="dislike"><i class="fa-regular fa-thumbs-down" style="color: black;"></i>2</div>
+                        <div class="share"><i class="fa-solid fa-share" style="color: black;"></i></div>
+                    </div>
+                </div>
+                <div class="small"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/ace.js"
+        integrity="sha512-+jESSLfWnLFLB0xrEnlj3yESiiuuuOnVDcq+HXImWWCB5CBqAnVsmtIZ5GtrNMH0C6gPZoj6n14zJ0iwGYoswQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/ext-language_tools.min.js"
+        integrity="sha512-Thg/+2CD9a62wd9RhUes0dWKbg4Pq90sCXWr5JpKsIiqcW0Km46AbE662jiUI+z441pTYSM8D+/9LOuEscAuIQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+</body>
+</html>
