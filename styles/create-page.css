@@ -255,39 +255,40 @@ main {
             grid-template-columns: 1.5% 97% 1.5%;
 
             >.move {
-                width: fit-content;
-                flex-shrink: 0;
                 display: flex;
-                will-change: transform;
-                backface-visibility: hidden;
-                contain: content;
-                animation: scroll 41s linear infinite;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                overflow: hidden;
 
                 >.moving-text {
-                    white-space: nowrap;
-                    user-select: none;
-                    text-transform: uppercase;
                     display: flex;
                     align-items: center;
-                    contain: content;
-                    position: relative;
+                    position: absolute;
+                    overflow: hidden;
+                    gap: 1rem;
+                    animation: marquee 5s linear infinite;
 
-                    >.span-0, .span-1 {
+                    .span-0, .span-1 {
+                        display: flex;
+                        align-items: center;
+                        gap: 2rem;
                         color: rgba(33,33,33);
-                        margin: 0rem 50px;
                         font-size: 5rem;
+                        float: left;
+                        width: 50%;
+
+                        >.dot {
+                            font-size: 2rem;
+                            width: 0.5em;
+                            height: 0.5em;
+                            border-radius: 50%;
+                            border: 3px solid rgba(33,33,33);
+                        }
                     }
                     
-                    >.span-1 {
+                    .span-1 {
                         color: rgba(255, 77, 0);
-                    }
-                    
-                    >.dot {
-                        width: 0.5em;
-                        height: 0.5em;
-                        display: block;
-                        border-radius: 50%;
-                        border: 3px solid rgba(33,33,33);
                     }
                 }
             }
@@ -425,6 +426,11 @@ main {
     }
 }
 
+@keyframes marquee {
+    0% { left: 0; }
+    100% { left: -100%; }
+  }
+
 .popup {
     position: fixed;
     height: 100vh;
@@ -433,6 +439,7 @@ main {
     justify-content: center;
     align-items: center;
     z-index: 1;
+    background-color: rgb(0, 0, 0, 0.8);
 }
 
 .create-form {

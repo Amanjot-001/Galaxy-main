@@ -643,9 +643,12 @@ app.get('/delProjectsData', async(req, res)=> {
 app.get('/find', async(req, res) => {
     const user = await User.find({});
     const questionsData = await UserQuestionsData.findById("650ae77124925ddbcd092c18");
-    const personalData = await UserPersonalProjects.findById("650c0c89387f1a2f7396ce2d")
+    const personalData = await UserPersonalProjects.findById("650c0c89387f1a2f7396ce2d");
+
+    const personaldatas = await UserPersonalProjects.find({});
+    res.send(personaldatas)
     // res.send(questionsData);
-    res.send(personalData)
+    // res.send(personalData)
     // res.send(user)
 })
 
@@ -692,7 +695,9 @@ app.get('/run', (req, res) => {
 });
 
 app.get('/codePlay', async(req, res) => {
-    res.render('codePlay');
+    let title = req.query.title;
+    title = title.replace(/\s+/g, " ").trim();
+    res.render('codePlay', { title });
 })
 
 app.get('/Calculator/Questions', (req, res) => {
@@ -766,7 +771,25 @@ app.get('/login', (req,res) => {
 })
 
 app.get('/create', async(req, res) => {
-    res.render('create');
+    sessionId = req.cookies.userId;
+    const user = await User.findById((sessionId));
+    const personalId = user.PersonalProjectData;
+    const personalData = await UserPersonalProjects.findById(personalId);
+
+    // console.log(personalData.creations.length)
+    res.render('create-page', {personalData});
+})
+
+app.post('/checkTitle', async(req, res) => {
+    const projectTitle = req.body.title;
+    const checkTitle = await UserPersonalProjects.findOne({ title: projectTitle})
+
+    if(checkTitle) res.sendStatus(200);
+    else res.sendStatus(404);
+})
+
+app.get('/upload', async(req, res) => {
+    res.render('upload-form');
 })
 
 app.listen(8080, () => {
