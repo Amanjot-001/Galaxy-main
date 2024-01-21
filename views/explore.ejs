@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/040eb06c51.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/explore.css">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-content">
+            <div class="logo">Galaxy</div>
+            <div class="features">
+                <!-- <a href="/explore">Explore</a> -->
+                <a href="/projects">Projects</a>
+                <a href="/create">Code Play</a>
+                <!-- <a href="/typing">Typing Test</a> -->
+                <a href="/upload">Upload</a>
+                <% if (typeof sessionId !=='undefined' ) { %>
+                    <% if (!sessionId) { %>
+                        <a href="/signIn">Register</a>
+                        <% } else { %>
+                            <a href="/explore">Profile</a>
+                            <% } %>
+                                <% } else { %>
+                                    <a href="/signIn">Register</a>
+                                    <% } %>  
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="greet">
+                <div>Hello,</div>
+                <div>
+                    <% if (typeof sessionId !== 'undefined') { %>
+                        <% if (!sessionId) { %>
+                            Yash Poonia
+                       <% } else { %>
+                        <%= usr.name %>
+                      <% } %>
+                   <% } else { %>
+                     Yash Poonia
+                     <% } %>
+                </div>
+            </div>
+            <div class="heading">
+                <div>This is the Hall of Fame of everyone in our community</div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="basic-info">
+            <div class="first-row">
+                <div class="small-row">
+                    <div class="small small-000"></div>
+                    <div class="big big-000">
+                        Search By Roll Number
+                    </div>
+                    <div class="small small-001"></div>
+                    <div class="big big-001">
+                        Search By College Name
+                    </div>
+                    <div class="small small-002"></div>
+                    <div class="big big-002">
+                        Search By Class
+                    </div>
+                    <div class="small small-003"></div>
+                </div>
+            </div>
+            <div class="second-row">
+                <div class="large-row">
+                    <div class="small small-110"></div>
+                    <div class="big big-110">
+                        <div class="search-wrapper">
+                            <input type="text" placeholder="Enter Roll Number" class="rollNo-search">
+                            <div class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        </div>
+                    </div>
+                    <div class="small small-111"></div>
+                    <div class="big big-111">
+                        <div class="search-wrapper">
+                            <input type="text" placeholder="Enter College Name" class="clg-search">
+                            <div class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        </div>
+                    </div>
+                    <div class="small small-112"></div>
+                    <div class="big big-112">
+                        <div class="search-wrapper">
+                            <input type="text" placeholder="Enter Starting Roll Number" class="start-roll-search">
+                            <div class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        </div>
+                        <div class="search-wrapper">
+                            <input type="text" placeholder="Enter Last Roll Number" class="end-roll-search">
+                            <div class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        </div>
+                    </div>
+                    <div class="small small-113"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="floating-display">
+            <div class="first-row">
+                <div class="small-row">
+                    <div class="small small-020"></div>
+                    <div class="big big-020"></div>
+                    <div class="small small-021"></div>
+                </div>
+            </div>
+            <div class="second-row">
+                <div class="large-row">
+                    <div class="small small-130"></div>
+                    <div class="big big-130">
+                        <div class="move">
+                            <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your Work</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your Work</span>
+                                <span class="dot"></span>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="small small-131"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-display">
+            <div class="first-row">
+                <div class="small-row">
+                    <div class="small small-040"></div>
+                    <div class="big big-040">
+                        Nature
+                    </div>
+                    <div class="small small-041">
+                    </div>
+                    <div class="big big-041">
+                        Info
+                    </div>
+                    <div class="small small-042"></div>
+                </div>
+            </div>
+            <div class="second-row">
+                <div class="large-row">
+                    <div class="small small-150"></div>
+                    <div class="big big-150"></div>
+                    <div class="small small-151"></div>
+                    <div class="big big-151">
+                        <div class="desc">
+                            <p>
+                             The Nature Conservancy California protects the state's incredible natural beauty. For over 65 years, they've been working hard to preserve California's wildlife, habitats, and natural resources. From the redwoods in the north to the sandy beaches in the south, they're ensuring that the states natural wonders are here to stay.
+                            </p>
+                        </div>
+                        <div class="details">
+                            <div class="team-details">
+                                <div class="first-detail">Created By:</div>
+                                <div>Amanjot Singh</div>
+                                <div>Sakshi Sharma</div>
+                                <div>Aditya Pratap Singh</div>
+                                <div>Shobit Jain</div>
+                            </div>
+                            <div class="mentor-details">
+                                <div class="first-detail">Mentor:</div>
+                                <div>Pranav Mittal</div>
+                            </div>
+                            <div class="clg-details">
+                                <div class="first-detail">College</div>
+                                <div>MIET</div>
+                            </div>
+                        </div>
+                        <div class="see-all-btn">
+                            <div>See All</div>
+                        </div>
+                    </div>
+                    <div class="small small-152"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="floating-display">
+            <div class="first-row">
+                <div class="small-row">
+                    <div class="small small-020"></div>
+                    <div class="big big-020"></div>
+                    <div class="small small-021"></div>
+                </div>
+            </div>
+            <div class="second-row">
+                <div class="large-row">
+                    <div class="small small-130"></div>
+                    <div class="big big-130">
+                        <div class="move">
+                            <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>    <h1 class="moving-text m-0">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Trending</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Trending</span>
+                                <span class="dot"></span>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="small small-131"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="project-display">
+            <div class="first-row">
+                <div class="small-row">
+                    <div class="small small-040"></div>
+                    <div class="big big-040">
+                        Earth
+                    </div>
+                    <div class="small small-041">
+                    </div>
+                    <div class="big big-041">
+                        Info
+                    </div>
+                    <div class="small small-042"></div>
+                </div>
+            </div>
+            <div class="second-row">
+                <div class="large-row">
+                    <div class="small small-150"></div>
+                    <div class="big big-150 second"></div>
+                    <div class="small small-151"></div>
+                    <div class="big big-151">
+                        <div class="desc">
+                            <p>
+                                Jigsaw, formerly Google Ideas, works to make the internet a safe place for free expression. Jigsaw provides people in oppressed countries tools to protect themselves from digital attacks and allow them to share their opinion freely.                            </p>
+                        </div>
+                        <div class="details">
+                            <div class="team-details">
+                                <div class="first-detail">Created By:</div>
+                                <div>Amanjot Singh</div>
+                                <div>Sakshi Sharma</div>
+                                <div>Aditya Pratap Singh</div>
+                                <div>Shobit Jain</div>
+                            </div>
+                            <div class="mentor-details">
+                                <div class="first-detail">Mentor:</div>
+                                <div>Pranav Mittal</div>
+                            </div>
+                            <div class="clg-details">
+                                <div class="first-detail">College</div>
+                                <div>MIET</div>
+                            </div>
+                        </div>
+                        <div class="see-all-btn">
+                            <div>See All</div>
+                        </div>
+                    </div>
+                    <div class="small small-152"></div>
+                </div>
+            </div>
+        </div>
+
+
+  <div class="floating-display">
+            <div class="first-row">
+                <div class="small-row">
+                    <div class="small small-020"></div>
+                    <div class="big big-020"></div>
+                    <div class="small small-021"></div>
+                </div>
+            </div>
+            <div class="second-row">
+                <div class="large-row">
+                    <div class="small small-130"></div>
+                    <div class="big big-130">
+                        <div class="move">
+                            <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1> <h1 class="moving-text m-0">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                            <h1 class="moving-text m-1">
+                                <span class="span-0">Your College</span>
+                                <span class="dot"></span>
+                                <span class="span-1">Your College</span>
+                                <span class="dot"></span>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="small small-131"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-display">
+            <div class="first-row">
+                <div class="small-row">
+                    <div class="small small-040"></div>
+                    <div class="big big-040">
+                        Music
+                    </div>
+                    <div class="small small-041">
+                    </div>
+                    <div class="big big-041">
+                        Info
+                    </div>
+                    <div class="small small-042"></div>
+                </div>
+            </div>
+            <div class="second-row">
+                <div class="large-row">
+                    <div class="small small-150"></div>
+                    <div class="big big-150 third"></div>
+                    <div class="small small-151"></div>
+                    <div class="big big-151">
+                        <div class="desc">
+                            <p>
+                                I am constantly generating small ideas in my head. I often create prototypes or visualizations to prevent these ideas from slipping away. They are not complete projects and are not necessarily pursued further, but they are a creative outlet I enjoy doing.                            </p>
+                        </div>
+                        <div class="details">
+                            <div class="team-details">
+                                <div class="first-detail">Created By:</div>
+                                <div>Amanjot Singh</div>
+                                <div>Sakshi Sharma</div>
+                                <div>Aditya Pratap Singh</div>
+                                <div>Shobit Jain</div>
+                            </div>
+                            <div class="mentor-details">
+                                <div class="first-detail">Mentor:</div>
+                                <div>Pranav Mittal</div>
+                            </div>
+                            <div class="clg-details">
+                                <div class="first-detail">College</div>
+                                <div>MIET</div>
+                            </div>
+                        </div>
+                        <div class="see-all-btn">
+                            <div>See All</div>
+                        </div>
+                    </div>
+                    <div class="small small-152"></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script src="/scripts/explore.js"></script>
+    
+</body>
+</html>

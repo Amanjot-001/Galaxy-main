@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/typing-test.css">
+</head>
+<body>
+
+    <div class="popups">
+        <div class="popup-wraper">
+            <div class="inputOwnTextWrapper">
+                <div class="heading">Provide your own text</div>
+                <div class="input-text" contenteditable="true"></div>
+                <div class="button" onclick="handlePopupInputButton()">Start</div>
+            </div>
+        </div>
+    </div>
+    
+    <nav>
+        <div class="nav-content">
+            <div class="logo">Galaxy</div>
+            <div class="features">
+                <a href="/explore">Explore</a>
+                <a href="/projects">Projects</a>
+                <a href="/create">Code Play</a>
+                <a href="/typing">Typing Test</a>
+                <a href="/upload">Upload</a>
+                <% if (typeof sessionId !=='undefined' ) { %>
+                    <% if (!sessionId) { %>
+                        <a href="/signIn">Register</a>
+                        <% } else { %>
+                            <a href="/">Profile</a>
+                            <% } %>
+                                <% } else { %>
+                                    <a href="/signIn">Register</a>
+                                    <% } %>  
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="greet">
+                <div>Hello,</div>
+                <div>
+                    <% if (typeof sessionId !== 'undefined') { %>
+                        <% if (!sessionId) { %>
+                            Yash Poonia
+                       <% } else { %>
+                        <%= usr.name %>
+                      <% } %>
+                   <% } else { %>
+                     Yash Poonia
+                     <% } %>
+                </div>
+            </div>
+            <div class="heading">
+                <div>Sharpen your keystrokes<br>
+                    and master the art of typing,<br>
+                    one key at a time.</div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="row-0 row">
+            <div class="inner-row small-row">
+                <div class="mat-00 small"></div>
+                <div class="mat-01 large"></div>
+                <div class="mat-02 small"></div>
+            </div>
+        </div>
+
+        <div class="row-1 row">
+            <div class="inner-row floating-display">
+                <div class="mat-10 small"></div>
+                <div class="mat-11 large">
+                    <div class="move">
+                        <h1 class="moving-text m-0">
+                            <span class="span-0">Typing Test</span>
+                            <span class="dot"></span>
+                            <span class="span-1">Typing Test</span>
+                            <span class="dot"></span>
+                        </h1>
+                        <h1 class="moving-text m-1">
+                            <span class="span-0">Typing Test</span>
+                            <span class="dot"></span>
+                            <span class="span-1">Typing Test</span>
+                            <span class="dot"></span>
+                        </h1>
+                    </div>
+                </div>
+                <div class="mat-12 small"></div>
+            </div>
+        </div>
+
+        <div class="row-2 row">
+            <div class="inner-row small-row">
+                <div class="mat-20 small"></div>
+                <div class="mat-21 large"></div>
+                <div class="mat-22 small"></div>
+            </div>
+        </div>
+
+        <div class="row-3 row">
+            <div class="inner-row">
+                <div class="mat-30 small"></div>
+                <div class="mat-31 large">
+                    <div class="timer">
+                        <ul class="timer-options">
+                            <li class="grow-link" value="15">15</li>
+                            <li class="grow-link" value="30">30</li>
+                            <li class="grow-link" value="60">60</li>
+                            <li class="grow-link" value="120">120</li>
+                        </ul>
+                    </div>
+                    <div class="text">
+                        <div class="typing-area">
+                            <div class="caret"></div>
+                            <p class="given-text">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi at maiores consectetur sunt pariatur eum quia! Modi commodi ipsam distinctio nesciunt facilis illum perferendis odio, laudantium, expedita ratione, consequatur impedit!
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio quos debitis, quo animi inventore dolore minus accusantium neque ad perferendis quidem asperiores voluptate modi maxime laborum hic distinctio blanditiis in!
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta repellat error a vel ipsa molestiae consequuntur labore, porro doloremque recusandae aut aliquid numquam impedit eligendi architecto, omnis, aspernatur ipsum id!
+                            </p>
+                            <p id="after-text" class="hidden"></p>
+                            <input type="text" id="myInput" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="mat-32 small"></div>
+            </div>
+        </div>
+
+        <div class="row-4 row">
+            <div class="inner-row small-row">
+                <div class="mat-40 small"></div>
+                <div class="mat-41 large"></div>
+                <div class="mat-42 small"></div>
+            </div>
+        </div>
+
+        <div class="row-5 row">
+            <div class="inner-row">
+                <div class="mat-50 small"></div>
+                <div class="mat-51 large">
+                    <div class="result">
+                        <div class="result-content">
+                            <div class="score">
+                                <p class="grow-link">Score: <span>nil</span> </p>
+                            </div>
+                            <div class="accuracy">
+                                <p class="grow-link">Accuracy: <span>nil</span> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mat-52 small"></div>
+                <div class="mat-53 large">
+                    <div class="live-time">
+                        <div>
+                            <p class="grow-link">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mat-54 small"></div>
+                <div class="mat-55 large">
+                    <div class="own-text">
+                        Click here, to input <br>
+                        your own text
+                    </div>
+                </div>
+                <div class="mat-56 small"></div>
+            </div>
+        </div>
+
+        <div class="row-6 row">
+            <div class="inner-row small-row">
+                <div class="mat-60 small"></div>
+                <div class="mat-61 large"></div>
+                <div class="mat-62 small"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="/scripts/typing-test.js"></script>
+</body>
+</html>

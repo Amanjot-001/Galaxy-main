@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Play</title>
+
+    <script src="https://kit.fontawesome.com/040eb06c51.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/codePlay.css">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">Galaxy</div>
+            <div class="features">
+                <!-- <a href="/explore">Explore</a> -->
+                <a href="/projects">Projects</a>
+                <!-- <a href="/create">Code Play</a> -->
+                <!-- <a href="/typing">Typing Test</a> -->
+                <a href="/upload">Upload</a>
+                <% if (typeof sessionId !=='undefined' ) { %>
+                    <% if (!sessionId) { %>
+                        <a href="/signIn">Register</a>
+                        <% } else { %>
+                            <a href="/explore">Profile</a>
+                            <% } %>
+                                <% } else { %>
+                                    <a href="/signIn">Register</a>
+                                    <% } %>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <p class="title">
+            <%= title %>
+        </p>
+    </header>
+
+    <main>
+        <div class="row-0">
+            <div class="inner-0">
+                <div class="small"></div>
+                <div class="large">
+                    <span class="editor-tabs">
+                        <span class="html tab-selected">HTML</span>
+                        <span class="css">CSS</span>
+                        <span class="javascript">JAVASCRIPT</span>
+                    </span>
+                    <span class="editor-icons">
+                        <span class="copy"><i class="fa-regular fa-copy" style="color: #ffffff;"></i></span>
+                        <span class="settings"><i class="fa-solid fa-gear" style="color: #ffffff;"></i></span>
+                    </span>
+                </div>
+                <div class="small"></div>
+                <div class="normal">
+                    <div class="preview"></div>
+                    Preview:
+                </div>
+                <div class="small"></div>
+            </div>
+        </div>
+        <div class="row-1">
+            <div class="inner-1">
+                <div class="small"></div>
+                <div class="large">
+                    <div id="editor"></div>
+                </div>
+                <div class="small"></div>
+                <div class="normal">
+                    <div class="view">
+                        <iframe src="/codePlay-run" frameborder="0"></iframe>
+                    </div>
+                </div>
+                <div class="small"></div>
+            </div>
+        </div>
+        <div class="row-2">
+            <div class="inner-2">
+                <div class="small"></div>
+                <div class="large">
+                    <div class="run-btn">Run <i class="fa-solid fa-circle-check" style="color: #ff4d00;"></i></div>
+                    <div class="submit-btn">Save <i class="fa-solid fa-right-to-bracket" style="color: #ff4d00;"></i>
+                    </div>
+                </div>
+                <div class="small"></div>
+                <div class="normal">
+                    <div class="fullscreen-btn">
+                        Fullscreen <i class="fa-solid fa-expand" style="color: #000000;"></i>
+                    </div>
+                </div>
+                <div class="small"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/ace.js"
+        integrity="sha512-+jESSLfWnLFLB0xrEnlj3yESiiuuuOnVDcq+HXImWWCB5CBqAnVsmtIZ5GtrNMH0C6gPZoj6n14zJ0iwGYoswQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/ext-language_tools.min.js"
+        integrity="sha512-Thg/+2CD9a62wd9RhUes0dWKbg4Pq90sCXWr5JpKsIiqcW0Km46AbE662jiUI+z441pTYSM8D+/9LOuEscAuIQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/scripts/codePlay.js"></script>
+</body>
+
+</html>

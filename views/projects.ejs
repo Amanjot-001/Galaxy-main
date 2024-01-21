@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/projects.css">
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-content">
+            <div class="logo">Galaxy</div>
+            <div class="features">
+                <!-- <a href="/explore">Explore</a> -->
+                <!-- <a href="/projects">Projects</a> -->
+                <a href="/create">Code Play</a>
+                <!-- <a href="/typing">Typing Test</a> -->
+                <a href="/upload">Upload</a>
+                <% if (typeof sessionId !=='undefined' ) { %>
+                    <% if (!sessionId) { %>
+                        <a href="/signIn">Register</a>
+                        <% } else { %>
+                            <a href="/explore">Profile</a>
+                            <% } %>
+                                <% } else { %>
+                                    <a href="/signIn">Register</a>
+                                    <% } %>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="greet">
+                <div>Welcome</div>
+                <div>
+                    <% if (typeof sessionId !=='undefined' ) { %>
+                        <% if (!sessionId) { %>
+                            User
+                            <% } else { %>
+                                <%= usr.name %>
+                                    <% } %>
+                                        <% } else { %>
+                                            User
+                                            <% } %>
+                </div>
+            </div>
+            <div class="headings">
+                <div class="heading">
+                    <div>Your Web Dev Playground: </div>
+                    <div>Real Projects Ahead</div>
+                </div>
+                <div class="sub-heading">
+                    <div>
+                        Unlock the Power of Active Learning: Master Web Development Through Hands-On Experience with
+                        Real Projects
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="move-up">
+                <div class="arrow"></div>
+            </div>
+            <div class="about">
+                <div>Created By-</div>
+                <div class="name"><b>Amanjot Singh</b></div>
+                <div class="follow">Follow me</div>
+                <div class="social-links">
+                    <a href="https://github.com/Amanjot-001">GitHub</a>
+                    <a href="https://www.linkedin.com/in/amanjot-singh-2298a6232/">LinkedIn</a>
+                    <a href="https://x.com/Amanjotsingh001?t=Y8pBfV71mb4zfZ_i-MoxgQ&s=09">Twitter</a>
+                    <a href="https://www.instagram.com/amanjotsingh_001?igsh=MXVsbWpzb3BycDJhcg==">Instagram</a>
+                </div>
+                <div class="name"><b>Yash Poonia</b></div>
+                <div class="follow">Follow me</div>
+                <div class="social-links">
+                    <a href="https://github.com/yash7xm">GitHub</a>
+                    <a href="https://www.linkedin.com/in/yashpoonia/">LinkedIn</a>
+                    <a href="https://x.com/Yash_Poonia_?s=20">Twitter</a>
+                    <a href="https://www.instagram.com/yash_chaudhary_23_?igsh=anF5MXk1OHR4M2lx">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://kit.fontawesome.com/792c2e8fcc.js" crossorigin="anonymous"></script>
+    <script src="/scripts/projects.js"></script>
+</body>
+
+</html>
